@@ -1,3 +1,4 @@
+import { Text } from './components'
 import './globals.css'
 
 export const metadata = {
@@ -8,7 +9,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="mx-auto text-neutral-800 dark:text-neutral-200 bg-neutral-200 dark:bg-neutral-800 font-sans">
+        <header className="p-4 max-md:h-[10vh] shadow-md dark:bg-neutral-900">
+          <Text className="text-2xl text-center" title pink>
+            Bub Shopper App
+          </Text>
+        </header>
+        <main className="max-md:h-[85vh] px-4 max-md:overflow-y-auto">
+          {children}
+        </main>
+        <footer className="max-md:h-[5vh] px-4 py-4 text-center flex items-center justify-center border border-neutral-300 dark:border-none">
+          <Text className="text-sm">Bub Shopper App v0.1</Text>
+        </footer>
+      </body>
     </html>
   )
 }

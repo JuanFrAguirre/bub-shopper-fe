@@ -1,91 +1,59 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+'use client'
 
-const inter = Inter({ subsets: ['latin'] })
+import clsx from 'clsx'
+import { useState } from 'react'
+import { Modal, Text } from './components'
+import Add from './icons/Add'
+import { Product } from './products'
+
+const products = [
+  {
+    title: 'Coca Cola lata',
+    price: 1.05,
+  },
+  {
+    title: 'Pepsi Cola lata',
+    price: 0.97,
+  },
+  {
+    title: 'Queso Havarti Fetas',
+    price: 2.15,
+  },
+]
 
 export default function Home() {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main>
+      <div className="grid grid-cols-3 gap-1 my-4">
+        {products.map((product) => (
+          <Product
+            key={product.title}
+            title={product.title}
+            price={product.price}
+          />
+        ))}
+      </div>
+      <div className="fixed bottom-16 left-6 p-4 rounded-md border shadow bg-neutral-100 text-center">
+        <Text className="text-xl font-semibold">Total:</Text>
+        <Text pink className="text-3xl font-bold">
+          € 14.5
+        </Text>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
+      <div
+        className="fixed bottom-16 right-6 p-4 rounded-full bg-pink-700 h-14 w-14 flex items-center justify-center"
+        onClick={() => setModalIsOpen(true)}
+      >
+        <Text className="text-5xl p-0 m-0 text-white">
+          <Add className="h-[50px] w-[50px]" fill={'#ffffff'} />
+        </Text>
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <Text>hola</Text>
+      </Modal>
     </main>
   )
 }
