@@ -36,7 +36,10 @@ export const Product = ({ title, presentation, price, added }) => {
               'text-grayish-400 text-sm basis-[20%] text-center italic',
             )}
           >
-            {presentation}
+            {`${presentation
+              .split('')
+              .map((char, i) => (i <= 10 ? char : null))
+              .join('')}${presentation.length > 11 ? '...' : ''}`}
           </Text>
           <Text
             className={clsx(
@@ -44,7 +47,7 @@ export const Product = ({ title, presentation, price, added }) => {
               added && 'text-white',
             )}
           >
-            € {price || '-'}
+            € {Number(price).toFixed(2) || '-'}
           </Text>
         </div>
       </div>

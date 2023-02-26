@@ -33,6 +33,8 @@ export const FormInput = ({
           className="border border-gray-400 dark:bg-gray-800 rounded-md px-4 py-1"
           ref={innerRef}
           placeholder={placeholder}
+          max={type === 'number' && 1000}
+          step={type === 'number' && 0.01}
         />
       ) : null}
       {type === 'select' ? (
