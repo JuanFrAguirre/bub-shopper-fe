@@ -11,6 +11,7 @@ export const FormInput = ({
   label,
   innerRef,
   placeholder,
+  required,
 }) => {
   const capitalize = (text) => {
     return text
@@ -30,11 +31,12 @@ export const FormInput = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className="border border-gray-400 dark:bg-gray-800 rounded-md px-4 py-1"
+          className="border border-gray-400 dark:bg-gray-800 rounded-md px-4 py-1 focus:outline-primary-600 active:outline-primary-600"
           ref={innerRef}
           placeholder={placeholder}
-          max={type === 'number' && 1000}
-          step={type === 'number' && 0.01}
+          max={1000}
+          step={0.01}
+          required={required}
         />
       ) : null}
       {type === 'select' ? (
@@ -44,6 +46,7 @@ export const FormInput = ({
           onChange={onChange}
           onBlur={onBlur}
           ref={innerRef}
+          required={required}
         >
           <option value="">-- Select an option --</option>
           {options.map((option) => (
