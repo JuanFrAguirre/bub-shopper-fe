@@ -66,7 +66,7 @@ export default function Home() {
   }, [addProductModalIsOpen])
 
   return (
-    <main>
+    <main className="mb-24">
       <ProductSection
         products={products}
         setProducts={setProducts}

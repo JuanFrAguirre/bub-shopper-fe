@@ -45,7 +45,7 @@ export const ProductSection = ({
   }
 
   const deleteProduct = (productId) => {
-    console.log(productId)
+    setProducts([...products.filter((product) => product.id !== productId)])
   }
 
   useEffect(() => {
@@ -59,9 +59,6 @@ export const ProductSection = ({
     <>
       <div className={clsx('my-4 flex flex-col relative gap-4')}>
         <div className="flex items-center">
-          <Text primary className="text-xl">
-            {title}
-          </Text>
           <ChevronRight
             className={clsx(
               'w-8 h-8 transition-all duration-300',
@@ -69,7 +66,10 @@ export const ProductSection = ({
             )}
             fill="rgb(13,148,136)"
           />
-          <div className="bg-primary-600 h-[1px] w-full grow"></div>
+          <Text primary className="text-xl mx-2">
+            {title}
+          </Text>
+          {/* <div className="bg-primary-600 h-[1px] w-full grow"></div> */}
         </div>
         <input
           type="checkbox"
@@ -86,19 +86,22 @@ export const ProductSection = ({
           {products.length > 0 ? (
             <>
               <div className="grid grid-cols-3 md:grid-cols-6 gap-1 ">
-                {products.map((product, i) => (
-                  <div key={i} onClick={() => handleEditProduct(product)}>
-                    <Product
-                      title={product.title}
-                      id={product.id}
-                      price={product.price}
-                      presentation={product.presentation}
-                      added={product.added}
-                      setProducts={setProducts}
-                      deleteProduct={deleteProduct}
-                    />
-                  </div>
-                ))}
+                {products
+                  .map((product, i) => (
+                    <div key={i} onClick={() => handleEditProduct(product)}>
+                      <Product
+                        title={product.title}
+                        id={product.id}
+                        price={product.price}
+                        presentation={product.presentation}
+                        added={product.added}
+                        setProducts={setProducts}
+                        deleteProduct={deleteProduct}
+                        hasDelete={title === 'Carrito'}
+                      />
+                    </div>
+                  ))
+                  .reverse()}
               </div>
               {title === 'Carrito' ? (
                 <div className="flex justify-end">
