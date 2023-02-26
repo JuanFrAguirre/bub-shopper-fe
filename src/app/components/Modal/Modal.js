@@ -5,7 +5,7 @@ export const Modal = ({ children, isOpen, onClose, ...rest }) => {
   const handleClose = () => onClose()
   return (
     <div className={clsx(!isOpen && 'hidden')} {...rest}>
-      <div className="fixed bottom-[5%] left-[5vw] right-[5vw] bg-grayish-100 dark:bg-gray-900 rounded-3xl border shadow-xl z-30">
+      <div className="fixed bottom-[10%] left-[5vw] right-[5vw] bg-grayish-100 dark:bg-gray-900 rounded-3xl border shadow-xl z-30">
         <div className="p-6">
           {children}
           <div
