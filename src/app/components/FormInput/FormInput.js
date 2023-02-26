@@ -30,7 +30,7 @@ export const FormInput = ({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className="border border-gray-400 rounded-md px-4 py-1"
+          className="border border-gray-400 dark:bg-gray-800 rounded-md px-4 py-1"
           ref={innerRef}
           placeholder={placeholder}
         />

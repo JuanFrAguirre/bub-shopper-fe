@@ -94,7 +94,10 @@ export default function Home() {
       />
       <Modal
         isOpen={addProductModalIsOpen}
-        onClose={() => setAddProductModalIsOpen(false)}
+        onClose={() => {
+          setAddProductModalIsOpen(false)
+          formik.resetForm()
+        }}
       >
         <AddProductForm formik={formik} innerRef={title} />
       </Modal>
