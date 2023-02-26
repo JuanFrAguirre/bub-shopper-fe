@@ -8,6 +8,7 @@ export const FormInput = ({
   className,
   onChange,
   onBlur,
+  label,
   innerRef,
   placeholder,
 }) => {
@@ -20,7 +21,7 @@ export const FormInput = ({
 
   return (
     <div className={clsx('flex flex-col gap-1', className)}>
-      <label htmlFor={name}>{capitalize(name)}</label>
+      <label htmlFor={name}>{capitalize(label)}</label>
       {!type || type === 'text' || type === 'number' ? (
         <input
           type={type || 'text'}

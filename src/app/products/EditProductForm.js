@@ -9,17 +9,20 @@ export const EditProductForm = ({ formik, innerRef }) => {
           value={formik.values.title}
           onChange={formik.handleChange}
           innerRef={innerRef}
+          label="Titulo"
         />
         <FormInput
           name="price"
           value={formik.values.price}
           onChange={formik.handleChange}
           type="number"
+          label="Precio"
         />
         <FormInput
           name="presentation"
           value={formik.values.presentation}
           onChange={formik.handleChange}
+          label="Presentacion"
         />
 
         <button

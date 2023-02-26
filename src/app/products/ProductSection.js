@@ -87,6 +87,7 @@ export const ProductSection = ({
                     <Product
                       title={product.title}
                       price={product.price}
+                      presentation={product.presentation}
                       added={product.added}
                       setProducts={setProducts}
                     />

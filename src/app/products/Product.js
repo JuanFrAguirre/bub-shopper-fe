@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Text } from '../components'
 
-export const Product = ({ title, price, added }) => {
+export const Product = ({ title, presentation, price, added }) => {
   return (
     <>
       <div
@@ -22,14 +22,22 @@ export const Product = ({ title, price, added }) => {
           <Text
             className={clsx(
               added ? 'text-black' : 'dark:font-light',
-              'text-sm basis-2/3 text-center',
+              'text-sm basis-2/5 text-center',
             )}
           >
             {title}
           </Text>
           <Text
             className={clsx(
-              'basis-1/3 text-right pr-1 font-semibold',
+              !added && 'dark:font-light',
+              'text-grayish-400 text-sm basis-2/5 text-center italic',
+            )}
+          >
+            {presentation}
+          </Text>
+          <Text
+            className={clsx(
+              'basis-1/5 text-right pr-1 font-semibold',
               added && 'text-white',
             )}
           >
