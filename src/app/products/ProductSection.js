@@ -19,8 +19,6 @@ export const ProductSection = ({
   const formik = useFormik({
     initialValues: {
       title: '',
-      subtitle: '',
-      description: '',
       price: '',
       presentation: '',
     },
@@ -95,15 +93,17 @@ export const ProductSection = ({
                   </div>
                 ))}
               </div>
-              <div className="flex justify-end">
-                <button
-                  className="bg-primary-600 px-4 py-2 rounded-full my-4 text-white"
-                  type="button"
-                  onClick={handleFinishPurchase}
-                >
-                  <Text>Finalizar compra</Text>
-                </button>
-              </div>
+              {title === 'Carrito' ? (
+                <div className="flex justify-end">
+                  <button
+                    className="bg-primary-600 px-4 py-2 rounded-full my-4 text-white"
+                    type="button"
+                    onClick={handleFinishPurchase}
+                  >
+                    <Text>Finalizar compra</Text>
+                  </button>
+                </div>
+              ) : null}
             </>
           ) : (
             <Text>Aun no hay elementos</Text>

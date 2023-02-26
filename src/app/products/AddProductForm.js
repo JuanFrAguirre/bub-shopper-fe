@@ -11,16 +11,6 @@ export const AddProductForm = ({ formik, innerRef }) => {
           innerRef={innerRef}
         />
         <FormInput
-          name="subtitle"
-          value={formik.values.subtitle}
-          onChange={formik.handleChange}
-        />
-        <FormInput
-          name="description"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-        />
-        <FormInput
           name="price"
           value={formik.values.price}
           onChange={formik.handleChange}

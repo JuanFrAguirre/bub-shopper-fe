@@ -36,22 +36,10 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
-    getProducts()
-  }, [])
-
-  useEffect(() => {
-    if (addProductModalIsOpen) {
-      title.current.focus()
-    }
-  }, [addProductModalIsOpen])
-
   const formik = useFormik({
     initialValues: {
       id: '',
       title: '',
-      subtitle: '',
-      description: '',
       price: '',
       presentation: '',
     },
@@ -66,6 +54,24 @@ export default function Home() {
       setProductHasBeenAdded(true)
     },
   })
+
+  useEffect(() => {
+    getProducts()
+
+    const listenToKey = (e) => {
+      if (e.key === 'a') setAddProductModalIsOpen(true)
+    }
+    document.addEventListener('keydown', listenToKey, true)
+    return () => {
+      document.removeEventListener('keydown', listenToKey, true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (addProductModalIsOpen) {
+      title.current.focus()
+    }
+  }, [addProductModalIsOpen])
 
   return (
     <main>
