@@ -1,58 +1,102 @@
 'use client'
 
-import clsx from 'clsx'
-import { useState } from 'react'
-import { Modal, Text } from './components'
-import Add from './icons/Add'
-import { Product } from './products'
-
-const products = [
-  {
-    title: 'Coca Cola lata',
-    price: 1.05,
-  },
-  {
-    title: 'Pepsi Cola lata',
-    price: 0.97,
-  },
-  {
-    title: 'Queso Havarti Fetas',
-    price: 2.15,
-  },
-]
+import axios from 'axios'
+import { useFormik } from 'formik'
+import { useEffect, useRef, useState } from 'react'
+import { BottomNavBar, Modal, Text } from './components'
+import { AddProductForm, ProductSection } from './products'
 
 export default function Home() {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [addProductModalIsOpen, setAddProductModalIsOpen] = useState(false)
+  const [searchProductModalIsOpen, setSearchProductModalIsOpen] =
+    useState(false)
+  const [products, setProducts] = useState([])
+  const [productHasBeenAdded, setProductHasBeenAdded] = useState(false)
+  const [recentProducts, setRecentProducts] = useState([
+    {
+      id: 1,
+      title: 'Coca Cola lata',
+      price: 1.05,
+    },
+    {
+      id: 2,
+      title: 'Coca Cola botella',
+      price: 2.3,
+    },
+  ])
+
+  const title = useRef(null)
+
+  const getProducts = async () => {
+    try {
+      const res = await axios.get('http://localhost:8080/products')
+      console.log(res.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
+  useEffect(() => {
+    if (addProductModalIsOpen) {
+      title.current.focus()
+    }
+  }, [addProductModalIsOpen])
+
+  const formik = useFormik({
+    initialValues: {
+      id: '',
+      title: '',
+      subtitle: '',
+      description: '',
+      price: '',
+      presentation: '',
+    },
+    onSubmit: (values) => {
+      const maxId = products.reduce(
+        (max, prod) => (max > prod.id ? max : prod.id),
+        0,
+      )
+      setProducts([...products, { ...values, id: maxId + 1 }])
+      formik.handleReset()
+      setAddProductModalIsOpen(false)
+      setProductHasBeenAdded(true)
+    },
+  })
 
   return (
     <main>
-      <div className="grid grid-cols-3 gap-1 my-4">
-        {products.map((product) => (
-          <Product
-            key={product.title}
-            title={product.title}
-            price={product.price}
-          />
-        ))}
-      </div>
-      <div className="fixed bottom-16 left-6 p-4 rounded-md border shadow bg-neutral-100 text-center">
-        <Text className="text-xl font-semibold">Total:</Text>
-        <Text pink className="text-3xl font-bold">
-          € 14.5
-        </Text>
-      </div>
-
-      <div
-        className="fixed bottom-16 right-6 p-4 rounded-full bg-pink-700 h-14 w-14 flex items-center justify-center"
-        onClick={() => setModalIsOpen(true)}
+      <ProductSection
+        products={products}
+        setProducts={setProducts}
+        title="Carrito"
+        productHasBeenAdded={productHasBeenAdded}
+        setProductHasBeenAdded={setProductHasBeenAdded}
+      />
+      <ProductSection
+        products={recentProducts}
+        setProducts={setRecentProducts}
+        title="Recientes"
+      />
+      <BottomNavBar
+        products={products}
+        setAddProductModalIsOpen={setAddProductModalIsOpen}
+        setSearchProductModalIsOpen={setSearchProductModalIsOpen}
+      />
+      <Modal
+        isOpen={addProductModalIsOpen}
+        onClose={() => setAddProductModalIsOpen(false)}
       >
-        <Text className="text-5xl p-0 m-0 text-white">
-          <Add className="h-[50px] w-[50px]" fill={'#ffffff'} />
-        </Text>
-      </div>
-
-      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
-        <Text>hola</Text>
+        <AddProductForm formik={formik} innerRef={title} />
+      </Modal>
+      <Modal
+        isOpen={searchProductModalIsOpen}
+        onClose={() => setSearchProductModalIsOpen(false)}
+      >
+        <Text>SEARCH PRODUCT</Text>
       </Modal>
     </main>
   )

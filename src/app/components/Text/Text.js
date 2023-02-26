@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 
-export const Text = ({ children, className, pink, title, subtitle }) => {
+export const Text = ({ children, className, primary, title, subtitle }) => {
   return (
     <p
       className={clsx(
-        pink && 'text-pink-600',
+        primary && 'text-primary-600',
         title && 'text-2xl font-semibold',
         subtitle && 'text-xl',
         className,

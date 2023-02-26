@@ -1,4 +1,4 @@
-export const Add = (props) => {
+export const ChevronRight = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -7,7 +7,7 @@ export const Add = (props) => {
       width="48"
       {...props}
     >
-      <path d="M450 856V606H200v-60h250V296h60v250h250v60H510v250h-60Z" />
+      <path d="m375 816-43-43 198-198-198-198 43-43 241 241-241 241Z" />
     </svg>
   )
 }
