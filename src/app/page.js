@@ -57,14 +57,6 @@ export default function Home() {
 
   useEffect(() => {
     getProducts()
-
-    const listenToKey = (e) => {
-      if (e.key === 'a') setAddProductModalIsOpen(true)
-    }
-    document.addEventListener('keydown', listenToKey, true)
-    return () => {
-      document.removeEventListener('keydown', listenToKey, true)
-    }
   }, [])
 
   useEffect(() => {
