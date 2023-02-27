@@ -16,12 +16,10 @@ export default function Home() {
   const [productHasBeenAdded, setProductHasBeenAdded] = useState(false)
   const [recentProducts, setRecentProducts] = useState([
     {
-      id: 1,
       title: 'Coca Cola lata',
       price: 1.05,
     },
     {
-      id: 2,
       title: 'Coca Cola botella',
       price: 2.3,
     },
@@ -32,7 +30,7 @@ export default function Home() {
   const getProducts = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(URL.prod)
+      const res = await axios.get(`${URL.prod}/products`)
       setLoading(false)
       setProducts(res.data)
     } catch (error) {
@@ -48,7 +46,7 @@ export default function Home() {
     },
     onSubmit: async (values) => {
       setLoading(true)
-      await axios.post(URL.prod, values)
+      await axios.post(`${URL.prod}/products`, values)
       setLoading(false)
       addProductFormik.handleReset()
       setAddProductModalIsOpen(false)

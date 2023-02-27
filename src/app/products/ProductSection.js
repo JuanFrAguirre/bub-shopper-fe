@@ -27,9 +27,8 @@ export const ProductSection = ({
       presentation: '',
     },
     onSubmit: async (values) => {
-      console.log(values)
       setLoading(true)
-      await axios.put(`${URL.prod}${values.id}`, values)
+      await axios.put(`${URL.prod}/products/${values.id}`, values)
       setLoading(false)
       formik.handleReset()
       setEditProductIsOpen(false)
@@ -50,7 +49,7 @@ export const ProductSection = ({
 
   const deleteProduct = async (productId) => {
     setLoading(true)
-    await axios.delete(`${URL.prod}${productId}`)
+    await axios.delete(`${URL.prod}/products/${productId}`)
     getProducts()
     setLoading(false)
   }
@@ -94,22 +93,23 @@ export const ProductSection = ({
           {products.length > 0 ? (
             <>
               <div className="grid grid-cols-3 md:grid-cols-6 gap-1 ">
-                {products
-                  .map((product, i) => (
-                    <div key={i} onClick={() => handleEditProduct(product)}>
-                      <Product
-                        title={product.title}
-                        id={product.id}
-                        price={product.price}
-                        presentation={product.presentation}
-                        added={product.added}
-                        setProducts={setProducts}
-                        deleteProduct={deleteProduct}
-                        hasDelete={title === 'Carrito'}
-                      />
-                    </div>
-                  ))
-                  .reverse()}
+                {products &&
+                  products
+                    .map((product, i) => (
+                      <div key={i} onClick={() => handleEditProduct(product)}>
+                        <Product
+                          title={product.title}
+                          id={product.id}
+                          price={product.price}
+                          presentation={product.presentation}
+                          added={product.added}
+                          setProducts={setProducts}
+                          deleteProduct={deleteProduct}
+                          hasDelete={title === 'Carrito'}
+                        />
+                      </div>
+                    ))
+                    .reverse()}
               </div>
               {title === 'Carrito' ? (
                 <div className="flex justify-end">
