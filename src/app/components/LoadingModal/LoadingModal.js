@@ -14,7 +14,7 @@ export const LoadingModal = ({ show }) => {
             className="text-white text-2xl font-semibold animate-pulse"
             primary
           >
-            Loading...
+            Cargando...
           </Text>
         </div>
       </div>
