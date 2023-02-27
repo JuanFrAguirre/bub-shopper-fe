@@ -22,9 +22,15 @@ export const BottomNavBar = ({
             <div className="flex flex-col p-2 text-sm text-center text-white">
               <Text className="font-light">Total</Text>
               <Text className="text-lg">
-                {`€ ${products
-                  .reduce((total, product) => total + Number(product.price), 0)
-                  .toFixed(2)}`}
+                {`€ ${
+                  products &&
+                  products
+                    .reduce(
+                      (total, product) => total + Number(product.price),
+                      0,
+                    )
+                    .toFixed(2)
+                }`}
               </Text>
             </div>
           </div>
