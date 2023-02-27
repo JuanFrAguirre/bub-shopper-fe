@@ -17,7 +17,7 @@ export const Modal = ({ children, isOpen, onClose, ...rest }) => {
         </div>
       </div>
       <div
-        className="fixed h-screen w-screen top-0 left-0 z-20 bg-gray-900 opacity-50"
+        className="fixed h-screen w-screen top-0 left-0 z-20 bg-black/50"
         onClick={handleClose}
       ></div>
     </div>

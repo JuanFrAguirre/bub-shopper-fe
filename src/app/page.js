@@ -31,7 +31,9 @@ export default function Home() {
     try {
       setLoading(true)
       const res = await axios.get(`${URL.prod}/products`)
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 500)
       setProducts(res.data)
     } catch (error) {
       console.error(error)
