@@ -1,8 +1,10 @@
+import axios from 'axios'
 import clsx from 'clsx'
 import { useFormik } from 'formik'
 import { useState, useRef, useEffect } from 'react'
-import { Modal, Text } from '../components'
+import { LoadingModal, Modal, Text } from '../components'
 import { ChevronRight } from '../icons'
+import { URL } from '../URL'
 import { EditProductForm } from './EditProductForm'
 import { Product } from './Product'
 
@@ -12,8 +14,10 @@ export const ProductSection = ({
   setProducts,
   productHasBeenAdded,
   setProductHasBeenAdded,
+  getProducts,
 }) => {
   const [expanded, setExpanded] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [editProductIsOpen, setEditProductIsOpen] = useState(false)
 
   const formik = useFormik({
@@ -22,14 +26,14 @@ export const ProductSection = ({
       price: '',
       presentation: '',
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values)
-      const newProducts = products.map((product) =>
-        product.id == values.id ? { ...values } : product,
-      )
-      setProducts(newProducts)
+      setLoading(true)
+      await axios.put(`${URL.prod}${values.id}`, values)
+      setLoading(false)
       formik.handleReset()
       setEditProductIsOpen(false)
+      getProducts()
     },
   })
 
@@ -44,8 +48,11 @@ export const ProductSection = ({
     setProducts([])
   }
 
-  const deleteProduct = (productId) => {
-    setProducts([...products.filter((product) => product.id !== productId)])
+  const deleteProduct = async (productId) => {
+    setLoading(true)
+    await axios.delete(`${URL.prod}${productId}`)
+    getProducts()
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -57,6 +64,7 @@ export const ProductSection = ({
 
   return (
     <>
+      <LoadingModal show={loading} />
       <div className={clsx('my-4 flex flex-col relative gap-4')}>
         <div className="flex items-center">
           <ChevronRight
