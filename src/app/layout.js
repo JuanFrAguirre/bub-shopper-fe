@@ -9,6 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta title="Bub Shopper App" />
+      </head>
       <body className="mx-auto text-grayish-800 dark:text-grayish-200 bg-grayish-200 dark:bg-grayish-800 font-sans">
         <header className="p-4 h-[8vh] shadow-md dark:bg-grayish-900">
           <Text className="text-2xl text-center" primary title>
