@@ -76,6 +76,7 @@ export const ProductSection = ({
           <Text primary className="text-xl mx-2">
             {title}
           </Text>
+          <Text onClick={getProducts}>Recargar</Text>
           {/* <div className="bg-primary-600 h-[1px] w-full grow"></div> */}
         </div>
         <input

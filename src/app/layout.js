@@ -1,4 +1,4 @@
-import { Text } from './components'
+import { Header } from './components'
 import './globals.css'
 
 export const metadata = {
@@ -10,14 +10,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta title="Bub Shopper App" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+        <meta name="theme-color" content="#fff" />
       </head>
-      <body className="mx-auto text-grayish-800 dark:text-grayish-200 bg-grayish-200 dark:bg-grayish-800 font-sans">
-        <header className="p-4 h-[8vh] shadow-md dark:bg-grayish-900">
-          <Text className="text-2xl text-center" primary title>
-            Bub Shopper App
-          </Text>
-        </header>
+      <body className="mx-auto font-sans text-grayish-800 dark:text-grayish-200 bg-grayish-200 dark:bg-grayish-800">
+        <Header />
         <main className="h-[80vh] px-4 max-md:overflow-y-auto">{children}</main>
       </body>
     </html>
