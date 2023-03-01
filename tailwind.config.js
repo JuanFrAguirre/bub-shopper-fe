@@ -28,7 +28,7 @@ module.exports = {
           800: '#846358',
           900: '#43302b',
         },
-        primary: colors.teal,
+        primary: colors.pink,
         secondary: colors.orange,
         grayish: colors.neutral,
       },
